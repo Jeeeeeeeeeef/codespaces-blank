@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ds5q6q88guuap"]
+
+[ext_resource type="Script" path="res://monsters/reggaewood.gd" id="1_dymci"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_dymci")
