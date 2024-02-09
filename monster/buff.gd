@@ -14,7 +14,13 @@ class_name Buff
 # 	
 
 # Methods
+#   static constructor
 #  required
 # 	
 #  planned
 # 	
+
+
+static var display_name: String
+static var id: int
+
