@@ -6,7 +6,7 @@ static var description: String
 
 
 func apply(player: Player):
-    pass
+	pass
 
 func remove(player: Player):
-    pass
+	pass
