@@ -1,16 +1,14 @@
-class_name Fiery
+class_name Windy
 extends Element
 
 
 static func _static_init():
-	name = "Fiery"
+	name = "Windy"
 	offense_modifiers = {
-		Fiery: Modifiers.WEAK,
-		Water: Modifiers.WEAK,
 		Astral: Modifiers.WEAK,
-		Earth: Modifiers.WEAK,
+		Fiery: Modifiers.STRONG,
 		Fungal: Modifiers.STRONG,
-		Metallic: Modifiers.STRONG,
+		Metallic: Modifiers.WEAK,
 		Natural: Modifiers.STRONG
 	}
 

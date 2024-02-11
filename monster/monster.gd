@@ -1,33 +1,48 @@
-class_name Monster
 extends CharacterBody2D
+class_name Monster
 # Static Fields # Variables that are inherent to the class
 static var display_name: String
 static var id: int
 static var attack_at_level_pool: Dictionary
 static var buff_at_level_pool: Dictionary
 static var elements: Array[Element]
-static var speed: int
+static var speed: int = 300
 # Fields # Variables that are inherent to the object
 var passive: Passive
 var attacks: Array[Attack]
 var nickname: String
 var item: Item
 var attack: int
-var monster_owner: Player
+var following: Player
+var following_order: int
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+enum MovementType{
+	FLYING,
+	WALKING
+}
+const JUMP_VELOCITY = -400.0
+func _physics_process(delta):
+	if not is_on_floor():
+		velocity.y += gravity * delta
+	if following:
+		var desired_distance = following.position.x+following.distance * -sign(following.direction)
+		var desired_position = position.x - desired_distance 
+		velocity.x = 0
+		if following.jumped:
+			velocity.y = JUMP_VELOCITY
+		if abs(desired_position) > 10:
+			velocity.x =  speed * - sign(desired_position)
+		move_and_slide()
 
+		
 const bond_max = 500
 # bond is an integer from 1-bond_max
 var bond: int = 1
 # level is an integer from 1-100
-var level: int = 1
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-func _init(level):
-	if level != null:
-		self.level = level
-		for current_level in range(1,level + 1):
-			learn_attack(current_level)
-	else:
-		learn_attack(self.level)
+@export var level: int = 1
+func _init():
+	for current_level in range(1,level + 1):
+		learn_attack(current_level)
 
 func level_up():
 	level += 1
@@ -60,6 +75,8 @@ func learn_attack(level):
 	# meaning uses some integer that is in its keys
 	# in this case the key is also an integer
 	# i am also adding the value of the key in attack_at_level_pool to the attacks array in this example
+	if not attack_at_level_pool.find_key(level):
+		return 1
 	var attack = attack_at_level_pool[level]
 	if attack != null:
 		attacks.append(attack)
