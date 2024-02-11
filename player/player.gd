@@ -21,11 +21,14 @@ var direction = -1.0;
 var distance = 30.0;
 
 func _physics_process(delta):
+
 	if favorite_monster:
+		var desired_position
 		if direction < 0:
-			favorite_monster.velocity.x = clamp(-favorite_monster.position.x + (position.x+distance),-1,1) * speed
+			desired_position = -favorite_monster.position.x + (position.x+distance)
 		else:
-			favorite_monster.velocity.x = clamp(-favorite_monster.position.x + (position.x-distance),-1,1) * speed
+			desired_position = -favorite_monster.position.x + (position.x-distance)
+		favorite_monster.velocity.x = clamp(desired_position,-1,1) * speed
 		if abs(favorite_monster.position.x - position.x) < distance:
 			favorite_monster.velocity.x = 0
 		if not favorite_monster.is_on_floor():
@@ -33,6 +36,9 @@ func _physics_process(delta):
 		if favorite_monster.is_on_floor() and favorite_monster.position.y+ distance > position.y + 50:
 			favorite_monster.velocity.y = JUMP_VELOCITY
 		favorite_monster.move_and_slide()
+		if is_on_floor() and favorite_monster.position.distance_to(position) > JUMP_VELOCITY:
+			favorite_monster.position = desired_position
+
 		
 	# Add the gravity.
 	if not is_on_floor():
