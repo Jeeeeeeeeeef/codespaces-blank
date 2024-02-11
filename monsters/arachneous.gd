@@ -1,5 +1,5 @@
 extends Monster
-
+class_name Arachneous
 static func _static_init():
 	display_name = "Arachneous"
 	id = 2

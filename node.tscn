@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvaubclqd3pmv"]
+[gd_scene load_steps=7 format=3 uid="uid://bvaubclqd3pmv"]
 
-[ext_resource type="Script" path="res://monsters/reggaewood.gd" id="1_dymci"]
 [ext_resource type="PackedScene" uid="uid://b0j1reog2vero" path="res://player/player.tscn" id="2_mtxx0"]
 [ext_resource type="PackedScene" uid="uid://dij3nwjcqa6xn" path="res://monsters/Arachneous/arachneous.tscn" id="4_0gqly"]
 [ext_resource type="Texture2D" uid="uid://vmwrlfgw5nfe" path="res://player/TileSheet16.png" id="4_emws1"]
@@ -108,9 +107,9 @@ sources/0 = SubResource("TileSetAtlasSource_bwgr2")
 sources/1 = SubResource("TileSetAtlasSource_iw3pr")
 
 [node name="Node" type="Node"]
-script = ExtResource("1_dymci")
 
 [node name="Player" parent="." instance=ExtResource("2_mtxx0")]
+favorite_monster_path = NodePath("../Arachneous")
 
 [node name="TileMap" type="TileMap" parent="."]
 show_behind_parent = true

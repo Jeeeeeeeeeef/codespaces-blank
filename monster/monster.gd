@@ -1,5 +1,5 @@
 class_name Monster
-extends Node
+extends CharacterBody2D
 # Static Fields # Variables that are inherent to the class
 static var display_name: String
 static var id: int
@@ -20,7 +20,7 @@ const bond_max = 500
 var bond: int = 1
 # level is an integer from 1-100
 var level: int = 1
-
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _init(level):
 	if level != null:
 		self.level = level
@@ -28,6 +28,7 @@ func _init(level):
 			learn_attack(current_level)
 	else:
 		learn_attack(self.level)
+
 func level_up():
 	level += 1
 	learn_attack(level)
